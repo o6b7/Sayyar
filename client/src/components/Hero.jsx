@@ -6,6 +6,7 @@ import { useAppContext } from '../context/AppContext'
 import toast from 'react-hot-toast';
 import DateRangePicker from '../components/DateRangePicker';
 
+
 const Hero = () => {
     const { 
         pickup_date, 
