@@ -190,5 +190,3 @@ Feel free to fork this repo and submit pull requests.
 * Developed by [Qusai Abdullah](https://github.com/o6b7)
 * LinkedIn (https://www.linkedin.com/in/qusaiabdullah/)
 * Portfolio (https://qusaiabdullah-c6624.web.app)
-
-```
