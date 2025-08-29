@@ -48,7 +48,7 @@ const MyBookings = () => {
 
   // Check if car is deleted
   const isCarDeleted = (booking) => {
-    return !booking.car.owner;
+    return !booking.car || !booking.car.owner; // Added null check for booking.car
   };
 
   // Check if booking should be automatically cancelled
@@ -202,87 +202,109 @@ const MyBookings = () => {
         </div>
       ) : (
         <AnimatedContainer className="space-y-6 mb-12">
-          {bookings.map((booking, index) => (
-            <AnimatedItem 
-              key={booking._id}
-              index={index}
-              className='grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-6 p-4 sm:p-6 border border-gray-200 rounded-lg bg-white shadow-sm'
-            >
-              <div className='sm:col-span-1'>
-                <img src={booking.car.image} alt={`${booking.car.brand} ${booking.car.model}`} 
-                  className='w-full h-auto aspect-video object-cover rounded-md mb-3'/>
-                <p className='text-base sm:text-lg font-medium'>{booking.car.brand} {booking.car.model}</p>
-                <p className='text-gray-500 text-sm sm:text-base'>{booking.car.year} | {booking.car.category}</p>
-                
-                {/* Show refund message if applicable */}
-                {shouldShowRefund(booking) && (
-                  <p className="text-green-600 text-sm mt-2 font-medium">
-                    (سيتم استرداد المبلغ)
-                  </p>
-                )}
-              </div>
-
-              <div className='sm:col-span-2 text-right space-y-2 sm:space-y-3'>
-                {[
-                  ['رقم الحجز', booking._id],
-                  ['التاريخ', `${formatDate(booking.pickup_date)} إلى ${formatDate(booking.return_date)}`],
-                  ['مكان الاستلام', booking.car.location],
-                  ['الحالة', 
-                    <span className={`font-medium ${getStatusColor(booking)}`}>
-                      {getStatusText(booking)}
-                    </span>
-                  ],
-                  ...(booking.cancellationReason ? [['سبب الإلغاء', booking.cancellationReason]] : [])
-                ].map(([label, value], i) => (
-                  <AnimatedItem 
-                    key={label} 
-                    index={i}
-                    className='flex justify-between text-sm sm:text-base'
-                  >
-                    <span className='text-gray-500'>{label}</span>
-                    <span>{value}</span>
-                  </AnimatedItem>
-                ))}
-              </div>
-
-              <div className='text-right space-y-3 sm:space-y-4'>
-                <AnimatedItem 
-                  index={0}
-                  className='flex justify-between items-center'
-                >
-                  <span className='text-gray-500 text-sm sm:text-base'>المجموع:</span>
-                  <span className='text-base sm:text-lg font-bold flex items-center gap-1'>
-                    {booking.price}
-                    <img src={currency_black} alt="عملة" className="w-3 h-3 object-contain"/>
-                  </span>
-                </AnimatedItem>
-                <div className='flex flex-col gap-2'>
-                  <motion.button 
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => {
-                      setSelectedBooking(booking);
-                      setIsModalOpen(true);
-                    }}
-                    className='px-3 py-1.5 sm:px-4 sm:py-2 bg-[#1B4166] text-white rounded hover:bg-[#0D2E4D] transition-colors text-sm sm:text-base'
-                  >
-                    عرض التفاصيل
-                  </motion.button>
+          {bookings.map((booking, index) => {
+            // Check if car exists before rendering
+            const carExists = booking.car && typeof booking.car === 'object';
+            
+            return (
+              <AnimatedItem 
+                key={booking._id}
+                index={index}
+                className='grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-6 p-4 sm:p-6 border border-gray-200 rounded-lg bg-white shadow-sm'
+              >
+                <div className='sm:col-span-1'>
+                  {/* Handle missing car image */}
+                  {carExists ? (
+                    <img src={booking.car.image} alt={`${booking.car.brand} ${booking.car.model}`} 
+                      className='w-full h-auto aspect-video object-cover rounded-md mb-3'/>
+                  ) : (
+                    <div className='w-full h-auto aspect-video bg-gray-200 rounded-md mb-3 flex items-center justify-center'>
+                      <span className='text-gray-500'>صورة غير متوفرة</span>
+                    </div>
+                  )}
                   
-                  {canCancelBooking(booking) && (
+                  {carExists ? (
+                    <>
+                      <p className='text-base sm:text-lg font-medium'>{booking.car.brand} {booking.car.model}</p>
+                      <p className='text-gray-500 text-sm sm:text-base'>{booking.car.year} | {booking.car.category}</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className='text-base sm:text-lg font-medium'>سيارة محذوفة</p>
+                      <p className='text-gray-500 text-sm sm:text-base'>لم تعد هذه السيارة متوفرة</p>
+                    </>
+                  )}
+                  
+                  {/* Show refund message if applicable */}
+                  {shouldShowRefund(booking) && (
+                    <p className="text-green-600 text-sm mt-2 font-medium">
+                      (سيتم استرداد المبلغ)
+                    </p>
+                  )}
+                </div>
+
+                <div className='sm:col-span-2 text-right space-y-2 sm:space-y-3'>
+                  {[
+                    ['رقم الحجز', booking._id],
+                    ['التاريخ', `${formatDate(booking.pickup_date)} إلى ${formatDate(booking.return_date)}`],
+                    ['مكان الاستلام', carExists ? booking.car.location : 'غير متوفر'],
+                    ['الحالة', 
+                      <span className={`font-medium ${getStatusColor(booking)}`}>
+                        {getStatusText(booking)}
+                      </span>
+                    ],
+                    ...(booking.cancellationReason ? [['سبب الإلغاء', booking.cancellationReason]] : [])
+                  ].map(([label, value], i) => (
+                    <AnimatedItem 
+                      key={label} 
+                      index={i}
+                      className='flex justify-between text-sm sm:text-base'
+                    >
+                      <span className='text-gray-500'>{label}</span>
+                      <span>{value}</span>
+                    </AnimatedItem>
+                  ))}
+                </div>
+
+                <div className='text-right space-y-3 sm:space-y-4'>
+                  <AnimatedItem 
+                    index={0}
+                    className='flex justify-between items-center'
+                  >
+                    <span className='text-gray-500 text-sm sm:text-base'>المجموع:</span>
+                    <span className='text-base sm:text-lg font-bold flex items-center gap-1'>
+                      {booking.price}
+                      <img src={currency_black} alt="عملة" className="w-3 h-3 object-contain"/>
+                    </span>
+                  </AnimatedItem>
+                  <div className='flex flex-col gap-2'>
                     <motion.button 
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => handleCancel(booking)}
-                      className='px-3 py-1.5 sm:px-4 sm:py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm sm:text-base'
+                      onClick={() => {
+                        setSelectedBooking(booking);
+                        setIsModalOpen(true);
+                      }}
+                      className='px-3 py-1.5 sm:px-4 sm:py-2 bg-[#1B4166] text-white rounded hover:bg-[#0D2E4D] transition-colors text-sm sm:text-base'
                     >
-                      إلغاء الحجز
+                      عرض التفاصيل
                     </motion.button>
-                  )}
+                    
+                    {canCancelBooking(booking) && (
+                      <motion.button 
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        onClick={() => handleCancel(booking)}
+                        className='px-3 py-1.5 sm:px-4 sm:py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm sm:text-base'
+                      >
+                        إلغاء الحجز
+                      </motion.button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </AnimatedItem>
-          ))}
+              </AnimatedItem>
+            );
+          })}
         </AnimatedContainer>
       )}
 
