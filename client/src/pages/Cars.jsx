@@ -24,14 +24,13 @@ const Cars = () => {
     const [loading, setLoading] = useState(false);
     const [isInitialLoad, setIsInitialLoad] = useState(true);
 
-    // Function to check car availability including location
-    const checkCarAvailability = async (car) => {
+    // Function to check car availability
+    const checkCarAvailability = async (carId) => {
         try {
             const { data } = await axios.post('/api/booking/check-availability', {
-                carId: car._id,
+                carId,
                 pickup_date,
-                return_date,
-                pickup_location // Add location to the request
+                return_date
             });
             return data.isAvailable;
         } catch (error) {
@@ -44,18 +43,15 @@ const Cars = () => {
         setLoading(true);
         
         try {
-            // Check availability for each car including location
+            // First filter by location
+            const locationFilteredCars = cars.filter(car => 
+                car.location?.toLowerCase() === pickup_location.toLowerCase()
+            );
+            
+            // Check availability for each location-filtered car
             const availabilityResults = await Promise.all(
-                cars.map(async (car) => {
-                    // First check if car is available at the requested location
-                    const isAtLocation = car.pickup_locations?.some(
-                        location => location.toLowerCase() === pickup_location.toLowerCase()
-                    );
-                    
-                    if (!isAtLocation) return { car, isAvailable: false };
-                    
-                    // Then check date availability
-                    const isAvailable = await checkCarAvailability(car);
+                locationFilteredCars.map(async (car) => {
+                    const isAvailable = await checkCarAvailability(car._id);
                     return { car, isAvailable };
                 })
             );
@@ -72,17 +68,8 @@ const Cars = () => {
             }
         } catch (error) {
             console.error('Error searching car availability:', error);
-            // Fallback: Filter by location only if availability check fails
-            const locationFilteredCars = cars.filter(car => 
-                car.pickup_locations?.some(
-                    location => location.toLowerCase() === pickup_location.toLowerCase()
-                )
-            );
-            setFilteredCars(locationFilteredCars);
-            
-            if (locationFilteredCars.length === 0) {
-                toast.error('لا توجد سيارات متاحة في الموقع المحدد');
-            }
+            // Fallback: Show all cars if availability check fails
+            setFilteredCars(cars);
         }
         
         setLoading(false);
@@ -119,14 +106,6 @@ const Cars = () => {
                 <AnimatedContainer className='mb-10'>
                     <AnimatedItem className='flex flex-col items-center py-20 bg-light max-md:px-4'>
                         <Title title='السيارات المتاحة' subTitle='تصفح افضل السيارات من اختيارنا لمغامرتك التالية!'/>
-                        
-                        {isFiltersExist && (
-                            <div className="mb-4 text-center">
-                                <p className="text-gray-600">
-                                    البحث في: {pickup_location} | من: {pickup_date} | إلى: {return_date}
-                                </p>
-                            </div>
-                        )}
                         
                         <motion.div 
                             className='flex items-center bg-white px-4 mt-6 max-w-140 w-full h-12 rounded-full shadow'
@@ -166,6 +145,6 @@ const Cars = () => {
             )}
         </>
     );
- }
+}
 
 export default Cars;
