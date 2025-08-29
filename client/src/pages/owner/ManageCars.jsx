@@ -5,7 +5,7 @@ import { AnimatedContainer, AnimatedItem } from '../../utils/animation/container
 import { useAppContext } from '../../context/AppContext';
 import toast from 'react-hot-toast';
 import Skeleton from '../../components/common/Skeleton';
-import { showConfirmationDialog } from '../../utils/confirmationDialog'; 
+import { showConfirmationDialog } from '../../utils/ConfirmationDialog'; 
 import { withErrorHandling } from '../../utils/apiErrorHandler';
 
 const ManageCars = () => {
