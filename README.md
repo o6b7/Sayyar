@@ -187,13 +187,8 @@ Feel free to fork this repo and submit pull requests.
 ## 👨‍💻 Author
 
 **Sayyar (سيَّار) Project**
-Developed by [Qusai Abdullah](https://github.com/o6b7)
-LinkedIn (https://www.linkedin.com/in/qusaiabdullah/)
-Portfolio (https://qusaiabdullah-c6624.web.app)
+* Developed by [Qusai Abdullah](https://github.com/o6b7)
+* LinkedIn (https://www.linkedin.com/in/qusaiabdullah/)
+* Portfolio (https://qusaiabdullah-c6624.web.app)
 
-```
-
----
-
-⚡Would you like me to also **add professional GitHub badges (shields.io)** for technologies, license, build, etc. at the very top? That will make it stand out even more.
 ```
