@@ -28,7 +28,7 @@ export const itemVariants = {
 export const AnimatedContainer = ({ children, className = "" }) => (
   <motion.div
     initial="hidden"
-    whileInView="visible"
+    animate="visible" 
     viewport={{ once: true, margin: "0px 0px -100px 0px" }}
     variants={containerVariants}
     className={className}
