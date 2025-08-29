@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Title from '../components/Title';
 import { FilterIcon, Search } from 'lucide-react';
-import CarCard from '../components/carCard';
+import CarCard from '../components/CarCard';
 import { AnimatedContainer, AnimatedItem, itemVariants } from '../utils/animation/containerVariants';
 import { useSearchParams } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
-import { withErrorHandling } from '../utils/apiErrorHandler';
 import Skeleton from '../components/common/Skeleton';
 
 const Cars = () => {
