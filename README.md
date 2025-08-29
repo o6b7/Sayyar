@@ -153,7 +153,17 @@ The app should now be running at:
 ---
 
 ## 📸 Screenshots
-<img width="206" height="133" alt="Screenshot 2025-08-29 at 8 04 12 PM" src="https://github.com/user-attachments/assets/f540a210-185b-4128-b101-a73e7ea93f5e" />
+
+<img width="1421" height="815" alt="Screenshot 2025-08-29 at 8 14 19 PM" src="https://github.com/user-attachments/assets/4c6a1e77-7d59-45a4-b727-5768af90072d" />
+<img width="1421" height="815" alt="Screenshot 2025-08-29 at 8 14 16 PM" src="https://github.com/user-attachments/assets/d8e480c3-7d37-4c64-a76d-0ce886c54415" />
+<img width="1421" height="815" alt="Screenshot 2025-08-29 at 8 14 05 PM" src="https://github.com/user-attachments/assets/ee91fd27-99a2-40f0-b512-7ed36252955f" />
+<img width="1421" height="815" alt="Screenshot 2025-08-29 at 8 13 47 PM" src="https://github.com/user-attachments/assets/ebaa1bf5-ada7-4acd-87ad-1ced0f66970c" />
+<img width="1421" height="815" alt="Screenshot 2025-08-29 at 8 13 22 PM" src="https://github.com/user-attachments/assets/58540a3a-f564-4856-8cbf-433a8c41a2f0" />
+<img width="1421" height="815" alt="Screenshot 2025-08-29 at 8 13 09 PM" src="https://github.com/user-attachments/assets/afcc0deb-34a2-4bde-bda2-446b42959120" />
+<img width="1421" height="815" alt="Screenshot 2025-08-29 at 8 13 00 PM" src="https://github.com/user-attachments/assets/a89a3406-a6cf-494a-a777-43c8ec5aae10" />
+<img width="1421" height="815" alt="Screenshot 2025-08-29 at 8 12 55 PM" src="https://github.com/user-attachments/assets/84eb7512-12f8-43fe-aa64-459bc1a98a12" />
+<img width="1421" height="815" alt="Screenshot 2025-08-29 at 8 12 31 PM" src="https://github.com/user-attachments/assets/bb25b606-3752-4f94-aa8c-49dec49db972" />
+<img width="1421" height="815" alt="Screenshot 2025-08-29 at 8 06 59 PM" src="https://github.com/user-attachments/assets/5d35e500-3ec7-4ac9-97ff-f9e4009d46c0" />
 
 ---
 
