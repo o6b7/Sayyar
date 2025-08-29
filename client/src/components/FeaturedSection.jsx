@@ -1,5 +1,5 @@
 import Title from './Title'
-import CarCard from './carCard'
+import CarCard from './CarCard'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { AnimatedContainer, AnimatedItem } from '../utils/animation/containerVariants'
