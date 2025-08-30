@@ -7,7 +7,7 @@ const userRouter = express.Router();
 userRouter.post('/register', registerUser);
 userRouter.post('/login', loginUser);
 userRouter.get('/data', protect, getUserData);
-userRouter.get('/cars', protect, gatCars);
-userRouter.get('/car/:id', protect, getCar);
+userRouter.get('/cars', gatCars);
+userRouter.get('/car/:id', getCar);
 
 export default userRouter;
