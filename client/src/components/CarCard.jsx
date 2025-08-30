@@ -21,7 +21,8 @@ const CarCard = ({ car }) => {
         
         {/* Availability Badge */}
         {car.isAvailable && (
-          <p className="absolute top-4 right-1/2 transform -translate-x-1/2 bg-primary/90 text-white text-xs px-3 py-1 rounded-full backdrop-blur-sm">
+          <p className="absolute top-4 left-15 transform -translate-x-1/2 bg-primary/90 text-white text-xs px-3 py-1 rounded-full backdrop-blur-sm">
+
             متاحة الآن!
           </p>
         )}
