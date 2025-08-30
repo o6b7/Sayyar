@@ -45,7 +45,7 @@ const Hero = () => {
                     
                     <div className='flex flex-col md:flex-row items-start md:items-center gap-10 ml-0 md:ml-8 w-full'>
                         {/* Pickup Location */}
-                        <div className='flex flex-col items-start gap-2 w-full md:w-41'>
+                        <div className='flex flex-col items-start gap-2 w-full md:w-100'>
                             <label htmlFor="pickup-location" className='text-sm text-gray-500'>مكان الإستلام</label>
                             <select 
                                 id="pickup-location"
