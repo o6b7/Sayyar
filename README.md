@@ -128,8 +128,8 @@ The app should now be running at:
 
 ## 🚀 Deployment
 
-* **Frontend:** Deploy with [Vercel](https://vercel.com/)
-* **Backend:** Deploy with [Vercel](https://vercel.com/)
+* **Frontend:** Deploy with [Vercel](https://sayyar.vercel.app)
+* **Backend:** Deploy with [Vercel](https://sayyar-server.vercel.app/)
 * **Database:** MongoDB Atlas for cloud database
 * **Images:** ImageKit for storage and delivery
 
